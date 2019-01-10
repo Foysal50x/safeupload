@@ -17,7 +17,7 @@ class System implements ISystem
      * @return bool
      */
     public function isDir($path){
-        return is_dir($path)?true : false;
+        return is_dir($path);
     }
 
     /**
@@ -27,7 +27,7 @@ class System implements ISystem
     public function isWritable($path)
     {
         // TODO: Implement isWritable() method.
-        return is_writable($path)?true : false;
+        return is_writable($path);
     }
 
     /**
@@ -44,7 +44,7 @@ class System implements ISystem
      * @return bool
      */
     public function moveFile($source, $dest){
-        return @copy($source, $dest) && @unlink($source);
+        return copy($source, $dest) && unlink($source);
     }
 
     /**
