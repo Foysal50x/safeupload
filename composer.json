@@ -1,0 +1,26 @@
+{
+    "name": "faisal50x/safeupload",
+    "description": "this is secure file upload library",
+    "type": "library",
+    "require": {
+        "php": "^7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "7.5.x-dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Safe\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Faisal Ahmed",
+            "email": "contact.faisalahmed@gmail.com",
+            "homepage": "http://imfaisal.me",
+            "role": "developer"
+        }
+    ],
+    "minimum-stability": "dev"
+}
