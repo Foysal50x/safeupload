@@ -8,6 +8,7 @@ class Upload
 {
     protected $_files;
     public $error = array();
+    protected $maxsize = 51200;
     public function __construct($_files)
     {
         $this->_files = $_files;
