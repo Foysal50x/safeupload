@@ -14,6 +14,11 @@ class FileSize
      */
     protected $maxSize = 1024*1024*10;
 
+    /**
+     * @var array
+     */
+    protected $erroMessage = array();
+
     public function __construct($config = null)
     {
         if ($config != null){
@@ -40,5 +45,21 @@ class FileSize
     public function getMaxSize()
     {
         return $this->maxSize;
+    }
+
+    public function checkSize($file){
+
+        if($file['size'] == 0){
+            $this->erroMessage[] = $file['name'] . 'is empty';
+            return false;
+        }elseif ($file['size']< $this->minSize){
+            $this->erroMessage[] = $file['name'] . 'size is too lower then'. $this->minSize;
+            return false;
+        }elseif($file['size']> $this->maxSize){
+            $this->erroMessage[] = $file['name'] . 'size is too getter then'. $this->maxSize;
+            return false;
+        }else{
+            return true;
+        }
     }
 }
