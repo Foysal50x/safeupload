@@ -47,16 +47,21 @@ class FileSize
         return $this->maxSize;
     }
 
+
+    /**
+     * @param $file
+     * @return bool
+     */
     public function checkSize($file){
 
         if($file['size'] == 0){
             $this->erroMessage[] = $file['name'] . 'is empty';
             return false;
         }elseif ($file['size']< $this->minSize){
-            $this->erroMessage[] = $file['name'] . 'size is too lower then'. $this->minSize;
+            $this->erroMessage[] = $file['name'] . 'size too lower then'. $this->minSize;
             return false;
         }elseif($file['size']> $this->maxSize){
-            $this->erroMessage[] = $file['name'] . 'size is too getter then'. $this->maxSize;
+            $this->erroMessage[] = $file['name'] . 'size too getter then'. $this->maxSize;
             return false;
         }else{
             return true;
