@@ -10,7 +10,7 @@
 namespace Safe\System;
 
 
-class Utilities
+class Utilities implements \IUtilities
 {
     public static function convertToBytes($val){
         $val = trim($val);

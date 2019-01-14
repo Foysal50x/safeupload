@@ -1,9 +1,42 @@
 <?php
 namespace Safe\Validator;
 
+use Safe\System\Utilities;
+
 class Validate
 {
+    protected $mimeType;
+
+    protected $fileSize;
+
+    protected $utilities;
+
     public $errorMessage = array();
+
+    public function __construct()
+    {
+        $this->fileSize = new FileSize();
+
+        $this->mimeType = new MimeType();
+
+        $this->utilities = new Utilities();
+    }
+
+    /**
+     * @param FileSize $fileSize
+     */
+    public function setFileSize(FileSize $fileSize): void
+    {
+        $this->fileSize = $fileSize;
+    }
+
+    /**
+     * @param MimeType $mimeType
+     */
+    public function setMimeType(MimeType $mimeType): void
+    {
+        $this->mimeType = $mimeType;
+    }
 
     /**
      * @param $file
@@ -25,7 +58,8 @@ class Validate
         switch ($file['error']){
             case 1:
             case 2:
-                $this->errorMessage[] = $file['name'] . ' is to big.';
+                $this->errorMessage[] = $file['name'] . ' is to big (max: '.
+                    $this->utilities::convertFromBytes($this->fileSize->getMaxSize()) .').';
                 break;
             case 3:
                 $this->errorMessage[] = $file['name'] . 'was only partially uploaded.';

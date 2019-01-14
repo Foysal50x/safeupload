@@ -1,8 +1,14 @@
 <?php
 namespace Safe\Validator;
 
+use Safe\System\Utilities;
+
 class FileSize
 {
+    /**
+     * @var integer
+     */
+    protected $serverMax;
 
     /**
      * @var int
@@ -14,6 +20,7 @@ class FileSize
      */
     protected $maxSize = 1024*1024*10;
 
+    protected $utility;
     /**
      * @var array
      */
@@ -21,8 +28,11 @@ class FileSize
 
     public function __construct($config = null)
     {
+        $this->utilities = new Utilities();
+        $this->serverMax = $this->utilities::convertToBytes(ini_get('upload_max_filesize'));
         if ($config != null){
             if (array_key_exists('maxSize',$config)){
+
                 $this->maxSize = (is_numeric($config['maxSize']) && $config['maxSize'] > 0)?$config['maxSize']:$this->maxSize;
             }
             if (array_key_exists('minSize',$config)){
@@ -52,7 +62,7 @@ class FileSize
      * @param $file
      * @return bool
      */
-    public function checkSize($file){
+    public function validate($file){
 
         if($file['size'] == 0){
             $this->erroMessage[] = $file['name'] . 'is empty';
@@ -62,6 +72,10 @@ class FileSize
             return false;
         }elseif($file['size']> $this->maxSize){
             $this->erroMessage[] = $file['name'] . 'size too getter then'. $this->maxSize;
+            return false;
+        }elseif ($file['size'] > $this->serverMax){
+            $this->erroMessage[] = "Maximum size con't exceed server limit for individual files: ".
+                $this->utilities::convertFromBytes($this->serverMax);
             return false;
         }else{
             return true;
