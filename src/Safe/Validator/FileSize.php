@@ -57,7 +57,13 @@ class FileSize
         return $this->maxSize;
     }
 
-
+    /**
+     * @return array
+     */
+    public function getErroMessage()
+    {
+        return $this->erroMessage;
+    }
     /**
      * @param $file
      * @return bool

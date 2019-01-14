@@ -47,6 +47,15 @@ class Validate
             $this->getErrorMessage($file);
             return false;
         }
+
+        if (!$this->mimeType->validate($file)){
+            $this->errorMessage = array_merge($this->errorMessage,$this->mimeType->getErrorMessage());
+            return false;
+        }
+        if (!$this->fileSize->validate($file)){
+            $this->errorMessage = array_merge($this->errorMessage,$this->fileSize->getErroMessage());
+            return false;
+        }
         return true;
     }
 
