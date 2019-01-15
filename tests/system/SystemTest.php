@@ -67,10 +67,10 @@ class SystemTest extends PHPUnit\Framework\TestCase
 
         $this->assertFalse($this->system->fileExists($file));
     }
-    public function testMoveFileTrue(){
+    /*public function testMoveFileTrue(){
         $source = __DIR__."/move.php";
         $dest = __DIR__ . "/move/move.php";
 
         $this->assertTrue($this->system->moveFile($source,$dest));
-    }
+    }*/
 }

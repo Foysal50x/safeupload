@@ -6,18 +6,35 @@ use Safe\Validator\Validate;
 
 class Upload
 {
+    /**
+     * @var $_files
+     */
     protected $_files;
 
+    /**
+     * @var $filePath
+     */
+    protected $filePath;
+
+    /**
+     * @var $validator
+     */
     protected $validator;
 
-    public $error = array();
+    /**
+     * @var $uploadPath
+     */
+    protected $uploadPath;
 
-    protected $maxsize = 51200;
+    /**
+     * @var array $error
+     */
+    public $error = array();
 
     public function __construct($_files)
     {
         $this->_files = $_files;
-        $this->validator = new Validate();;
+        $this->validator = new Validate();
     }
 
     /**
@@ -27,19 +44,42 @@ class Upload
     {
         $this->validator = $validator;
     }
+
+    /**
+     * @param mixed $uploadPath
+     */
+    public function setUploadPath($uploadPath)
+    {
+        $this->uploadPath = $uploadPath;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getUploadPath()
+    {
+        return $this->uploadPath;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFilePath()
+    {
+        return $this->filePath;
+    }
+
+    /**
+     *
+     */
     public function prepare(){
 
-        $system = new System();
         $validate = $this->validator;
         $uploaded = current($this->_files);
         if ($validate->upload($uploaded)){
 
-            try{
 
-
-            }catch (\Exception $e){
-
-            }
 
         }
     }

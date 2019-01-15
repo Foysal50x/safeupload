@@ -13,9 +13,9 @@ namespace Safe\Validator;
 class FileType
 {
 
-    protected $suffix = '.upload';
+    protected $suffix = '.safeupload';
 
-    protected $maliciousFile = array(
+    protected $maliciousType = array(
         'py',
         'sh',
         'bin',
@@ -24,5 +24,25 @@ class FileType
         'js',
         'exe'
     );
+
+
+    /**
+     * @return array
+     */
+    public function getMaliciousType()
+    {
+        return $this->maliciousType;
+    }
+
+    /**
+     * @param array $maliciousType
+     */
+    public function setMaliciousType(array $maliciousType)
+    {
+        $this->maliciousType = $maliciousType;
+    }
+
+
+
 
 }

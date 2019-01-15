@@ -5,14 +5,34 @@ use Safe\System\Utilities;
 
 class Validate
 {
+    /**
+     * @var MimeType
+     */
     protected $mimeType;
 
+    /**
+     * @var FileSize
+     */
     protected $fileSize;
 
+    /**
+     * @var $fileType
+     */
+    protected $fileType;
+
+    /**
+     * @var Utilities
+     */
     protected $utilities;
 
+    /**
+     * @var array $errorMessage
+     */
     public $errorMessage = array();
 
+    /**
+     * Validate constructor.
+     */
     public function __construct()
     {
         $this->fileSize = new FileSize();
@@ -20,6 +40,8 @@ class Validate
         $this->mimeType = new MimeType();
 
         $this->utilities = new Utilities();
+
+        $this->fileType = new FileType();
     }
 
     /**
