@@ -4,11 +4,17 @@ use Safe\System\System;
 
 class Path implements IPath
 {
+
     /**
      * File upload folder
      * @var $destination
      */
     protected $destination;
+
+    /**
+     * @var array
+     */
+    protected $errorMessage = array();
 
     /**
      * Path constructor.
@@ -17,6 +23,12 @@ class Path implements IPath
     public function __construct($uploadFolder)
     {
         $this->destination = $uploadFolder;
+
+        try{
+            $this->validate();
+        }catch (\Exception $exception){
+            $this->errorMessage[] = $exception;
+        }
     }
 
     /**
@@ -38,5 +50,13 @@ class Path implements IPath
     public function getDestination()
     {
         return $this->destination;
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrorMessage()
+    {
+        return $this->errorMessage;
     }
 }

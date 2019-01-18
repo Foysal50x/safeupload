@@ -30,13 +30,12 @@ class Upload extends PHPUnit\Framework\TestCase
 
     public function testSetUploadPath(){
         $pathResolve = new \Safe\Resolver\Path('uploads/');
-        try{
-            $pathResolve->validate();
-        }catch (Exception $exception){
-            $this->assertNotEmpty($exception);
-        }
 
+        $this->assertEmpty($pathResolve->getErrorMessage());
         $this->assertEquals($pathResolve->getDestination(),'uploads/');
     }
+
+
+
 
 }

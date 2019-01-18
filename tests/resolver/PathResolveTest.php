@@ -12,11 +12,7 @@ class PathResolveTest extends PHPUnit\Framework\TestCase
     public function testAssertUploadDirectoryEquals(){
         $dir = __DIR__."/unit/";
         $path = new \Safe\Resolver\Path($dir);
-        try{
-            $path->validate();
-        }catch (Exception $e){
-            $this->assertNotEmpty($e);
-        }
+        $this->assertEmpty($path->getErrorMessage());
         $this->assertEquals($path->getDestination(),"/Users/faisal/Playground/PHP/Safe Upload/tests/resolver/unit/");
     }
 }
