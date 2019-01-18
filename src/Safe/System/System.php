@@ -47,6 +47,10 @@ class System implements ISystem
         return copy($source, $dest) && unlink($source);
     }
 
+    public function renameFile($file){
+        $oldName = $file['name'];
+    }
+
     /**
      * @param
      * @return bool

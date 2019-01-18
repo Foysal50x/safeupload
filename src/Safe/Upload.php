@@ -1,6 +1,7 @@
 <?php
 namespace Safe;
 
+use Safe\Resolver\Path;
 use Safe\System\System;
 use Safe\Validator\Validate;
 
@@ -9,7 +10,7 @@ class Upload
     /**
      * @var $_files
      */
-    protected $_files;
+    public $_files;
 
     /**
      * @var $filePath
@@ -24,7 +25,7 @@ class Upload
     /**
      * @var $uploadPath
      */
-    protected $uploadPath;
+    protected $pathResolve;
 
     /**
      * @var array $error
@@ -48,9 +49,9 @@ class Upload
     /**
      * @param mixed $uploadPath
      */
-    public function setUploadPath($uploadPath)
+    public function setUploadPath(Path $uploadPath)
     {
-        $this->uploadPath = $uploadPath;
+        $this->pathResolve = $uploadPath;
     }
 
 
@@ -59,7 +60,7 @@ class Upload
      */
     public function getUploadPath()
     {
-        return $this->uploadPath;
+        return $this->pathResolve->getDestination();
     }
 
     /**
@@ -79,6 +80,7 @@ class Upload
         $uploaded = current($this->_files);
         if ($validate->upload($uploaded)){
 
+            $system = new System();
 
 
         }

@@ -15,8 +15,6 @@ class Upload extends PHPUnit\Framework\TestCase
     public function __construct(?string $name = null, array $data = [], string $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        $this->upload = new \Safe\Upload();
-
         $_FILES = array(
             'file'    =>  array(
                 'name'      =>  'images.jpeg',
@@ -26,13 +24,16 @@ class Upload extends PHPUnit\Framework\TestCase
                 'error'     =>  0
             )
         );
+        $this->upload = new \Safe\Upload($_FILES);
+
     }
 
-    public function testSetUploadPath(){
+    public function testSetUpload(){
         $pathResolve = new \Safe\Resolver\Path('uploads/');
 
-        $this->assertEmpty($pathResolve->getErrorMessage());
-        $this->assertEquals($pathResolve->getDestination(),'uploads/');
+        $this->assertIsArray($this->upload->_files);
+
+
     }
 
 
