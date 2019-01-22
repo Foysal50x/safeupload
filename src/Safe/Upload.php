@@ -72,13 +72,14 @@ class Upload
     }
 
     /**
-     *
+     * @return mixed
      */
-    public function prepare(){
+    public function prepare()
+    {
 
         $validate = $this->validator;
         $uploaded = current($this->_files);
-        if ($validate->upload($uploaded)){
+        if ($validate->upload($uploaded)) {
 
             $system = new System();
 
