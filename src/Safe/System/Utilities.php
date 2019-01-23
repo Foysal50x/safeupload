@@ -1,4 +1,5 @@
 <?php
+
 /**
  * #Author  @ Faisal Ahmed
  * #Date:   @ 1/14/19
@@ -10,13 +11,14 @@
 namespace Safe\System;
 
 
-class Utilities implements \IUtilities
+class Utilities implements IUtilities
 {
-    public static function convertToBytes($val){
+    public static function convertToBytes($val)
+    {
         $val = trim($val);
-        $last = strtolower($val[strlen($val-1)]);
-        if (in_array($last,array('g','m','k'))){
-            switch ($last){
+        $last = strtolower($val[strlen($val - 1)]);
+        if (in_array($last, array('g', 'm', 'k'))) {
+            switch ($last) {
                 case "g":
                     $val *= 1024;
                 case "m":
@@ -30,11 +32,12 @@ class Utilities implements \IUtilities
         return $val;
     }
 
-    public static function convertFromBytes($bytes){
+    public static function convertFromBytes($bytes)
+    {
         $bytes /= 1024;
-        if ($bytes > 1024){
-            return number_format($bytes/1024, 1) . ' MB';
-        }else{
+        if ($bytes > 1024) {
+            return number_format($bytes / 1024, 1) . ' MB';
+        } else {
             return number_format($bytes, 1) . ' KB';
         }
     }

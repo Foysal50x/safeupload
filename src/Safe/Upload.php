@@ -8,6 +8,10 @@ use Safe\Validator\Validate;
 class Upload
 {
     /**
+     * @var $ok
+     */
+    public $ok = false;
+    /**
      * @var $_files
      */
     public $_files;
@@ -82,8 +86,16 @@ class Upload
         if ($validate->upload($uploaded)) {
 
             $system = new System();
+            $dest = $this->pathResolve->getDestination() . $validate->getFileName();
+            if ($system->moveFile($validate->getTempPath(), $dest)) {
+                $this->filePath = $dest;
+                $this->ok = true;
+            } else {
+                $this->error[] = "Error moving file";
+            }
 
-
+        } else {
+            $this->error = array_merge($this->error, $validate->getErrorMessage());
         }
     }
 }

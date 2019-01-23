@@ -1,10 +1,17 @@
 <?php
 namespace Safe\Validator;
 
-use Safe\System\Utilities;
-
 class Validate
 {
+    /**
+     * @var $tempPath
+     */
+    protected $tempPath;
+
+    /**
+     * @var $fileName
+     */
+    protected $fileName;
     /**
      * @var MimeType
      */
@@ -39,15 +46,29 @@ class Validate
 
         $this->mimeType = new MimeType();
 
-        $this->utilities = new Utilities();
+        //$this->fileType = new FileType();
+    }
 
-        $this->fileType = new FileType();
+    /**
+     * @return string
+     */
+    public function getTempPath()
+    {
+        return $this->tempPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFileName()
+    {
+        return $this->fileName;
     }
 
     /**
      * @param FileSize $fileSize
      */
-    public function setFileSize(FileSize $fileSize): void
+    public function setFileSize(FileSize $fileSize) : void
     {
         $this->fileSize = $fileSize;
     }
@@ -55,7 +76,7 @@ class Validate
     /**
      * @param MimeType $mimeType
      */
-    public function setMimeType(MimeType $mimeType): void
+    public function setMimeType(MimeType $mimeType) : void
     {
         $this->mimeType = $mimeType;
     }
@@ -64,20 +85,22 @@ class Validate
      * @param $file
      * @return bool
      */
-    public function upload($file){
-        if ($file['error'] != 0){
-            $this->getErrorMessage($file);
+    public function upload($file)
+    {
+        if ($file['error'] != 0) {
+            $this->setErrorMessage($file);
             return false;
         }
-
-        if (!$this->mimeType->validate($file)){
-            $this->errorMessage = array_merge($this->errorMessage,$this->mimeType->getErrorMessage());
+        if (!$this->mimeType->validate($file)) {
+            $this->errorMessage = array_merge($this->errorMessage, $this->mimeType->getErrorMessage());
             return false;
         }
-        if (!$this->fileSize->validate($file)){
-            $this->errorMessage = array_merge($this->errorMessage,$this->fileSize->getErroMessage());
+        if (!$this->fileSize->validate($file)) {
+            $this->errorMessage = array_merge($this->errorMessage, $this->fileSize->getErroMessage());
             return false;
         }
+        $this->tempPath = $file['tmp_name'];
+        $this->fileName = $file['name'];
         return true;
     }
 
@@ -85,12 +108,13 @@ class Validate
      * @param $file
      * @return mixed
      */
-    protected function getErrorMessage($file){
-        switch ($file['error']){
+    protected function setErrorMessage($file)
+    {
+        switch ($file['error']) {
             case 1:
             case 2:
-                $this->errorMessage[] = $file['name'] . ' is to big (max: '.
-                    $this->utilities::convertFromBytes($this->fileSize->getMaxSize()) .').';
+                $this->errorMessage[] = $file['name'] . ' is to big (max: ' .
+                    $this->fileSize::convertFromBytes($this->fileSize->getMaxSize()) . ').';
                 break;
             case 3:
                 $this->errorMessage[] = $file['name'] . 'was only partially uploaded.';
@@ -102,6 +126,14 @@ class Validate
                 $this->errorMessage[] = 'Sorry there was a problem uploading' . $file['name'];
                 break;
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrorMessage()
+    {
+        return $this->errorMessage;
     }
 
 }
