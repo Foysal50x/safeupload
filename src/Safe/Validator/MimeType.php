@@ -3,6 +3,18 @@ namespace Safe\Validator;
 
 class MimeType
 {
+    protected $suffix = '.safeupload';
+
+    protected $maliciousType = array(
+        'py',
+        'sh',
+        'bin',
+        'cgi',
+        'php',
+        'js',
+        'exe'
+    );
+
     protected $permittedMimeTypes;
 
     protected $errorMessage = array();
@@ -32,7 +44,7 @@ class MimeType
      */
     public function __construct()
     {
-        $this->permittedMimeTypes = array_merge($this->defaultImageMimeTypes,$this->defaultAudioMimeTypes);
+        $this->permittedMimeTypes = array_merge($this->defaultImageMimeTypes, $this->defaultAudioMimeTypes);
     }
 
     /**
@@ -47,12 +59,13 @@ class MimeType
      * @param $file
      * @return bool
      */
-    public function validate($file) {
+    public function validate($file)
+    {
 
-        if (in_array($file["type"],$this->permittedMimeTypes)){
+        if (in_array($file["type"], $this->permittedMimeTypes)) {
             return true;
-        }else{
-            $this->errorMessage[] = $file['name'] .'is invalid type of file.';
+        } else {
+            $this->errorMessage[] = $file['name'] . 'is invalid type of file.';
             return false;
         }
     }
