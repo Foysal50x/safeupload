@@ -13,6 +13,11 @@
             "Safe\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Safe\\": "src/"
+        }
+    },
     "license": "MIT",
     "authors": [
         {
