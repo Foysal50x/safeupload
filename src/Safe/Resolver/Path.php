@@ -1,5 +1,15 @@
 <?php
+
+/**
+ * #Author  @ Faisal Ahmed
+ * #Date:   @ 1/15/19
+ * #Phone:  @ 01788656451
+ * #Email:  @ contact.faisalahmed@gmail.com
+ * #Project Safe Upload File @ Path.php
+ */
+
 namespace Safe\Resolver;
+
 use Safe\System\System;
 
 class Path implements IPath
@@ -24,9 +34,9 @@ class Path implements IPath
     {
         $this->destination = $uploadFolder;
 
-        try{
+        try {
             $this->validate();
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             $this->errorMessage[] = $exception;
         }
     }
@@ -35,11 +45,12 @@ class Path implements IPath
      * @throws \Exception
      * @return mixed
      */
-    public function validate(){
+    public function validate()
+    {
 
         $system = new System();
-        if ($this->destination[strlen($this->destination) -1] != '/') $this->destination .= '/';
-        if (!$system->isDir($this->destination) || !$system->isWritable($this->destination)){
+        if ($this->destination[strlen($this->destination) - 1] != '/') $this->destination .= '/';
+        if (!$system->isDir($this->destination) || !$system->isWritable($this->destination)) {
             throw new \Exception("$this->destination must be a valid, writable folder");
         }
     }

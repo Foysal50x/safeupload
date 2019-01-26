@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * #Author  @ Faisal Ahmed
+ * #Date:   @ 1/15/19
+ * #Phone:  @ 01788656451
+ * #Email:  @ contact.faisalahmed@gmail.com
+ * #Project Safe Upload File @ System.php
+ */
+
 namespace Safe\System;
 
 class System implements ISystem
@@ -8,7 +17,8 @@ class System implements ISystem
      * @param string $path
      * @return bool
      */
-    public function isFile($path){
+    public function isFile($path)
+    {
         return is_file($path);
     }
 
@@ -16,7 +26,8 @@ class System implements ISystem
      * @param $path
      * @return bool
      */
-    public function isDir($path){
+    public function isDir($path)
+    {
         return is_dir($path);
     }
 
@@ -34,8 +45,9 @@ class System implements ISystem
      * @param $path
      * @return bool
      */
-    public function fileExists($path){
-        return file_exists($path)? true : false;
+    public function fileExists($path)
+    {
+        return file_exists($path) ? true : false;
     }
 
     /**
@@ -43,11 +55,13 @@ class System implements ISystem
      * @param $dest
      * @return bool
      */
-    public function moveFile($source, $dest){
+    public function moveFile($source, $dest)
+    {
         return copy($source, $dest) && unlink($source);
     }
 
-    public function renameFile($file){
+    public function renameFile($file)
+    {
         $oldName = $file['name'];
     }
 
@@ -55,7 +69,8 @@ class System implements ISystem
      * @param
      * @return bool
      */
-    public function clearStateCache($path){
+    public function clearStateCache($path)
+    {
         return clearstatcache($path);
     }
 
@@ -63,7 +78,8 @@ class System implements ISystem
      * @param $path
      * @return bool
      */
-    public function unlink($path){
+    public function unlink($path)
+    {
         return @unlink($path);
     }
 

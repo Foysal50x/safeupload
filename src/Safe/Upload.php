@@ -1,4 +1,13 @@
 <?php
+
+/**
+ * #Author  @ Faisal Ahmed
+ * #Date:   @ 1/15/18
+ * #Phone:  @ 01788656451
+ * #Email:  @ contact.faisalahmed@gmail.com
+ * #Project Safe Upload File @ Upload.php
+ */
+
 namespace Safe;
 
 use Safe\Resolver\Path;

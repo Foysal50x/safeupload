@@ -6,8 +6,10 @@
  * #Email:  @ contact.faisalahmed@gmail.com
  * #Project Safe Upload File @ IUtilities.php
  */
+namespace Safe\System;
 
-interface IUtilities{
+interface IUtilities
+{
     /**
      * Convert number value to bytes value
      * @param $val

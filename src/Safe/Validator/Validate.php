@@ -1,5 +1,16 @@
 <?php
+
+/**
+ * #Author  @ Faisal Ahmed
+ * #Date:   @ 1/15/19
+ * #Phone:  @ 01788656451
+ * #Email:  @ contact.faisalahmed@gmail.com
+ * #Project Safe Upload File @ Validate.php
+ */
+
 namespace Safe\Validator;
+
+use Safe\System\Utilities;
 
 class Validate
 {
@@ -46,7 +57,9 @@ class Validate
 
         $this->mimeType = new MimeType();
 
-        //$this->fileType = new FileType();
+        $this->fileType = new FileType();
+
+        $this->utilities = new Utilities();
     }
 
     /**
@@ -114,7 +127,7 @@ class Validate
             case 1:
             case 2:
                 $this->errorMessage[] = $file['name'] . ' is to big (max: ' .
-                    $this->fileSize::convertFromBytes($this->fileSize->getMaxSize()) . ').';
+                    $this->utilities::convertFromBytes($this->fileSize->getMaxSize()) . ').';
                 break;
             case 3:
                 $this->errorMessage[] = $file['name'] . 'was only partially uploaded.';
