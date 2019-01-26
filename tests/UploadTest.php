@@ -32,11 +32,15 @@ class UploadTest extends PHPUnit\Framework\TestCase
     public function testUpload()
     {
         $path = new \Safe\Resolver\Path(__DIR__ . '/files/upload/');
+        $validator = new \Safe\Validator\Validate();
+        $mimeType = new \Safe\Validator\MimeType(array('audio/midi'));
+        $validator->setMimeType($mimeType);
+        $this->upload->setValidator($validator);
         $this->upload->setUploadPath($path);
         $this->assertIsArray($this->upload->_files);
         $this->upload->prepare();
-        $this->assertEmpty($this->upload->error);
-        $this->assertTrue($this->upload->ok);
+        $this->assertNotEmpty($this->upload->error);
+        $this->assertFalse($this->upload->ok);
     }
 
 

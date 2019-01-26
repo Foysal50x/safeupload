@@ -1,6 +1,9 @@
 <?php
 namespace Safe\Validator;
 
+use phpDocumentor\Reflection\Types\Void_;
+
+
 class MimeType
 {
     protected $suffix = '.safeupload';
@@ -42,15 +45,36 @@ class MimeType
     /**
      * MimeType constructor.
      */
-    public function __construct()
+    public function __construct(array $mimeType = null)
     {
-        $this->permittedMimeTypes = array_merge($this->defaultImageMimeTypes, $this->defaultAudioMimeTypes);
+        if ($mimeType !== null) {
+            $this->permittedMimeTypes = $mimeType;
+        } else {
+            $this->permittedMimeTypes = array_merge($this->defaultImageMimeTypes, $this->defaultAudioMimeTypes);
+        }
+    }
+
+    /**
+     * @param string $suffix
+     * @return mixed
+     */
+    public function setSuffix(string $suffix) : void
+    {
+        if (!empty($suffix)) $this->suffix = $suffix;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSuffix() : string
+    {
+        return $this->suffix;
     }
 
     /**
      * @return array
      */
-    public function getErrorMessage()
+    public function getErrorMessage() : array
     {
         return $this->errorMessage;
     }
@@ -59,7 +83,7 @@ class MimeType
      * @param $file
      * @return bool
      */
-    public function validate($file)
+    public function validate($file) : bool
     {
 
         if (in_array($file["type"], $this->permittedMimeTypes)) {
