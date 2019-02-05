@@ -28,7 +28,6 @@ class Utilities implements IUtilities
                 case "k":
                     $val *= 1024;
 					break;
-
             }
         }
 
