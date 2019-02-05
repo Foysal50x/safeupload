@@ -33,6 +33,8 @@ class UploadTest extends PHPUnit\Framework\TestCase
     {
         $path = new \Safe\Resolver\Path(__DIR__ . '/files/upload/');
         $validator = new \Safe\Validator\Validate();
+        $fileSize = new \Safe\Validator\FileSize();
+        $fileSize->setMaxSize(2);
         $mimeType = new \Safe\Validator\MimeType();
         $validator->setMimeType($mimeType);
         $this->upload->setValidator($validator);

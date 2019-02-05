@@ -33,10 +33,10 @@ class FileSize
         if ($config != null) {
             if (array_key_exists('maxSize', $config)) {
 
-                $this->maxSize = (is_numeric($config['maxSize']) && $config['maxSize'] > 0) ? $config['maxSize'] : $this->maxSize;
+                $this->maxSize = (is_numeric($config['maxSize']) && $config['maxSize'] > 0) ? $this->utility::convertToBytes($config['maxSize']) : $this->maxSize;
             }
             if (array_key_exists('minSize', $config)) {
-                $this->minSize = (is_numeric($config['minSize']) && $config['minSize'] > 0) ? $config['minSize'] : $this->minSize;;
+                $this->minSize = (is_numeric($config['minSize']) && $config['minSize'] > 0) ? $this->utility::convertToBytes($config['minSize']) : $this->minSize;;
             }
         }
     }
@@ -44,23 +44,36 @@ class FileSize
     /**
      * @return float|int
      */
-    public function getMinSize()
+    public function getMinSize(): void
     {
         return $this->minSize;
+    }
+
+    public function setMinSize($minSize): void
+    {
+        $this->minSize = $this->utility::convertToBytes($minSize);
     }
 
     /**
      * @return float|int
      */
-    public function getMaxSize()
+    public function getMaxSize(): int
     {
         return $this->maxSize;
     }
 
     /**
+     * @param integer $maxSize
+     * @return void
+     */
+    public function setMaxSize($maxSize): void
+    {
+        $this->maxSize = $this->utility::convertToBytes($maxSize);
+    }
+    /**
      * @return array
      */
-    public function getErroMessage()
+    public function getErroMessage(): array
     {
         return $this->erroMessage;
     }
@@ -68,7 +81,7 @@ class FileSize
      * @param $file
      * @return bool
      */
-    public function validate($file)
+    public function validate($file): bool
     {
 
         if ($file['size'] == 0) {
