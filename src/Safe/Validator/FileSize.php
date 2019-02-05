@@ -44,7 +44,7 @@ class FileSize
     /**
      * @return float|int
      */
-    public function getMinSize(): void
+    public function getMinSize(): int
     {
         return $this->minSize;
     }
