@@ -16,22 +16,23 @@ class Utilities implements IUtilities
     public static function convertToBytes($val)
     {
         $val = trim($val);
+        $bytes = substr($val, 0, strlen($val) - 2);
         $last = strtolower($val[strlen($val) - 2]);
         if (in_array($last, array('g', 'm', 'k'))) {
             switch ($last) {
                 case "g":
-                    $val *= 1024 * 1024 * 1024;
-					break;
+                    $bytes *= 1024 * 1024 * 1024;
+                    break;
                 case "m":
-                    $val *= 1024 * 1024;
-					break;
+                    $bytes *= 1024 * 1024;
+                    break;
                 case "k":
-                    $val *= 1024;
-					break;
+                    $bytes *= 1024;
+                    break;
             }
         }
 
-        return $val;
+        return $bytes;
     }
 
     public static function convertFromBytes($bytes)
