@@ -71,7 +71,7 @@ class Upload
     /**
      * @return mixed
      */
-    public function getUploadPath()
+    public function getUploadDir()
     {
         return $this->pathResolve->getDestination();
     }
