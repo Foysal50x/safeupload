@@ -16,8 +16,15 @@ class Utilities implements IUtilities
     public static function convertToBytes($val)
     {
         $val = trim($val);
-        $bytes = substr($val, 0, strlen($val) - 2);
-        $last = strtolower($val[strlen($val) - 2]);
+        $endOf = strtolower($val[strlen($val) - 2]);
+        if($endOf == 'k' || $endOf == 'm' || $endOf == 'g'){
+            $bytes = substr($val, 0, strlen($val) - 2);
+            $last = strtolower($val[strlen($val) - 2]);
+        }else {
+            $bytes = substr($val, 0, strlen($val) - 1);
+            $last = strtolower($val[strlen($val) - 1]);
+        }
+
         if (in_array($last, array('g', 'm', 'k'))) {
             switch ($last) {
                 case "g":
