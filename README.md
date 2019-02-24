@@ -42,6 +42,7 @@ $upload->setUploadPath($path);
 $upload->prepare();
 if($upload->ok){
     //Do something ...
+    echo $upload->getFilePath();
 }
 ```
 
