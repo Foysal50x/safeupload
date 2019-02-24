@@ -23,4 +23,12 @@ class UtilitiesTest extends PHPUnit\Framework\TestCase
         $bytes = 1024*1024*5;
         $this->assertEquals($bytes, $this->utilities::convertToBytes($size));
     }
+
+    public function testConvetFromBytes()
+    {
+        $bytes = 1024*2;
+        $size = '2.0 KB';
+
+        $this->assertEquals($size, $this->utilities::convertFromBytes($bytes));
+    }
 }
