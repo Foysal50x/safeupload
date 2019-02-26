@@ -10,5 +10,24 @@
 namespace Safe;
 
 interface IUpload {
+    /**
+     * @param Path $path
+     * @return mixed
+     */
+    public function setUploadPath(Path $path);
 
+    /**
+     * @return string
+     */
+    public function getUploadDir();
+
+    /**
+     * @return string
+     */
+
+    public function getFilePath();
+    /**
+     * @return mixed
+     */
+    public function prepare();
 } 
