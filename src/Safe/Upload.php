@@ -26,22 +26,27 @@ class Upload
     public $_files;
 
     /**
-     * @var $filePath
+     * @var string
      */
     protected $filePath;
 
+	/**
+	 * @var array
+	 */
+    protected $filePaths = [];
+
     /**
-     * @var $validator
+     * @var Validate
      */
     protected $validator;
 
     /**
-     * @var $uploadPath
+     * @var Path
      */
     protected $pathResolve;
 
     /**
-     * @var array $error
+     * @var array
      */
     public $error = array();
 
@@ -77,12 +82,19 @@ class Upload
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getFilePath()
+    public function getFilePath():string
     {
         return $this->filePath;
     }
+
+	/**
+	 * @return array
+	 */
+    public function getFilePaths():array {
+    	return $this->filePaths;
+	}
 
     /**
      * @return mixed
@@ -108,7 +120,24 @@ class Upload
             } else {
                 $this->error = array_merge($this->error, $validate->getErrorMessage());
             }
-        }
+        }elseif ($uploaded_file>1){
+        	foreach ($this->_files as $file){
+				if ($validate->upload($file)) {
+
+					$system = new System();
+					$dest = $this->pathResolve->getDestination() . $validate->getFileName();
+					if ($system->moveFile($validate->getTempPath(), $dest)) {
+						$this->filePaths[] = $dest;
+					} else {
+						$this->error[] = "Error moving file";
+					}
+
+				} else {
+					$this->error = array_merge($this->error, $validate->getErrorMessage());
+				}
+			}
+			$this->ok = true;
+		}
     }
 
 	/**

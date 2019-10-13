@@ -42,7 +42,7 @@ class UploadTest extends PHPUnit\Framework\TestCase
         $this->assertIsArray($this->upload->_files);
         $this->upload->prepare();
         $this->assertEmpty($this->upload->error);
-        $this->assertTrue($this->upload->ok);
+        $this->assertTrue($this->upload->isOk());
     }
 
 
