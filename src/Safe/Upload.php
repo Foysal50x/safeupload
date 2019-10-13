@@ -110,5 +110,12 @@ class Upload
             }
         }
     }
+
+	/**
+	 * @return bool
+	 */
+    public function isOk():bool {
+    	return $this->ok;
+	}
 }
 
