@@ -40,7 +40,7 @@ $validator->setMimeType($mimeType);
 $upload->setValidator($validator);
 $upload->setUploadPath($path);
 $upload->prepare();
-if($upload->ok){
+if($upload->isOk()){
     //Do something ...
     echo $upload->getFilePath();
 }
