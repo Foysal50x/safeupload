@@ -91,7 +91,7 @@ class Upload
     {
 
         $validate = $this->validator;
-        $uploaded_file = count(this->$_files);
+        $uploaded_file = count($this->_files);
         if ($uploaded_file === 1) {
             $uploaded = current($this->_files);
             if ($validate->upload($uploaded)) {
