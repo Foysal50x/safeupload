@@ -19,7 +19,7 @@ class Upload
     /**
      * @var $ok
      */
-    public $ok = false;
+    protected $ok = false;
     /**
      * @var $_files
      */
